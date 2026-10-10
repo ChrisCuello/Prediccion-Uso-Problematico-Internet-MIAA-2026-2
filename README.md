@@ -132,5 +132,3 @@ El desempeño de un modelo en esta base no demuestra que pueda detectar casos cl
 9. Suh, Y., & Yoo, J. (2025). *Risk level prediction for problematic internet use: A digital health perspective*. Internet Interventions. https://doi.org/10.1016/j.invent.2025.100863
 10. Malallah, F., & Iqbal, K. (2026). *Predicting Signs of Problematic Internet Use to Analyze Children's Health Using Machine Learning*. https://doi.org/10.5220/0014231300004070
 11. R., N. K., & S, P. (2025). *Predicting Problematic Internet Use in Children Using Feature-Rich Structured Data with Ensemble Machine Learning and Bayesian Optimisation*. https://doi.org/10.1109/apsipaasc65261.2025.11249107
-
-La revisión inicial utilizó como guías de búsqueda dos reportes obtenidos con Consensus y materiales académicos de la Universidad Icesi. Los antecedentes identificados mediante búsqueda asistida se señalan como preliminares cuando las métricas o detalles metodológicos todavía requieren consulta del texto original.
