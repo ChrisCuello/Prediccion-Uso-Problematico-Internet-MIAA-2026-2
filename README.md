@@ -1,154 +1,125 @@
 # Prediccion-Uso-Problematico-Internet MIAA 2026-2
 
-**Primera entrega — Reporte de la primera etapa (20 %)**
+**Universidad Icesi — Maestría en Inteligencia Artificial Aplicada**  
+**Asignatura:** Proyecto de Innovación IA · **Periodo académico:** 2026-2  
+**Autor:** Christian Cuello · [GitHub: ChrisCuello](https://github.com/ChrisCuello)  
+**Estado:** Proyecto en desarrollo
 
-| Información | Detalle |
-|---|---|
-| Institución | Universidad Icesi |
-| Programa | Maestría en Inteligencia Artificial Aplicada (MIAA) |
-| Asignatura | Proyecto de Innovación IA |
-| Periodo | 2026-2 |
-| Autor e integrante único | Christian Cuello |
-| GitHub | [@ChrisCuello](https://github.com/ChrisCuello) |
-| Estado | En desarrollo |
-| Primera entrega | **10 de octubre de 2026** |
-| Segunda entrega | **14 de noviembre de 2026** |
-| Entrega final | **1 de diciembre de 2026** |
+## Presentación
 
-## 1. Introducción y contexto
+Internet forma parte de la vida cotidiana de niños y adolescentes y ofrece oportunidades de aprendizaje, comunicación y entretenimiento. Sin embargo, su utilización puede considerarse problemática cuando existen dificultades para regularla y se presentan interferencias en las actividades habituales, las relaciones personales o el bienestar. Esta condición no se define únicamente por la cantidad de horas de conexión: involucra comportamientos, contextos y repercusiones que no siempre son fáciles de evaluar [1–3].
 
-Internet ofrece oportunidades de aprendizaje, comunicación y entretenimiento para niños y adolescentes. Su uso se considera **problemático** cuando aparecen dificultades de control y repercusiones negativas en el funcionamiento cotidiano; por tanto, no debe equipararse automáticamente con muchas horas de conexión. La investigación sobre el tema emplea diferentes conceptos e instrumentos, sin criterios de evaluación completamente uniformes [1–3].
+El interés por comprender este fenómeno ha motivado estudios sobre sus manifestaciones y factores asociados, así como la búsqueda de métodos que complementen las evaluaciones tradicionales. Entre estas iniciativas se encuentra la competición *Child Mind Institute — Problematic Internet Use*, organizada con Kaggle a partir de datos del estudio **Healthy Brain Network (HBN)**. El reto invita a investigar si indicadores físicos y de actividad, junto con otras características de los participantes, permiten estimar niveles de severidad del uso problemático de internet [4, 5].
 
-El Child Mind Institute y Kaggle propusieron el reto *Child Mind Institute — Problematic Internet Use*, basado en información del **Healthy Brain Network (HBN)**, para investigar si mediciones físicas, demográficas y de actividad permiten predecir niveles de severidad de este fenómeno [4–5]. Se trata de una oportunidad para explorar aprendizaje automático en un problema de interés social, sin suponer que el modelo sustituye la valoración profesional.
+En este contexto, el proyecto **Prediccion-Uso-Problematico-Internet MIAA 2026-2** plantea una investigación académica basada en aprendizaje automático. Su propósito no es establecer diagnósticos ni reemplazar la valoración profesional, sino examinar el potencial y las limitaciones de una aproximación predictiva construida con datos existentes.
 
-## 2. Análisis del problema (10 %)
+## Contexto y delimitación del problema
 
-### 2.1. Definición del problema social
+La evaluación del uso problemático de internet en población infantil y adolescente enfrenta dificultades conceptuales y prácticas. Los estudios utilizan instrumentos y criterios que no son completamente uniformes, mientras que las manifestaciones del fenómeno pueden variar según la edad, las circunstancias personales y las actividades realizadas en línea [1, 3]. A esto pueden sumarse barreras para acceder a valoraciones especializadas y la dificultad de reconocer oportunamente cuándo determinados comportamientos requieren atención [5].
 
-La identificación oportuna del uso problemático de internet en niños y adolescentes presenta dificultades por la heterogeneidad de sus manifestaciones, la diversidad de instrumentos de medición y las posibles barreras para acceder a evaluación especializada [1–3, 5].
+La relevancia de esta situación se relaciona con los hallazgos de investigaciones que describen asociaciones entre el uso problemático de internet y el funcionamiento cotidiano, la calidad de vida y algunos aspectos de la salud mental [2, 6, 7]. No obstante, estas asociaciones deben interpretarse con prudencia: no permiten afirmar por sí solas que un mayor uso de internet cause ansiedad, alteraciones del sueño o dificultades académicas. Las relaciones pueden ser bidireccionales o depender de otros factores.
 
-La literatura describe **asociaciones** entre uso problemático y dificultades de sueño, bienestar psicológico, calidad de vida o funcionamiento cotidiano [2, 6–7]. Estas asociaciones no demuestran por sí mismas que el uso de internet sea su causa: pueden existir factores compartidos y relaciones bidireccionales. Esta distinción es esencial para formular un problema social defendible.
+De este análisis se desprende el problema social que motiva la investigación: **las dificultades para identificar y evaluar oportunamente el uso problemático de internet en niños y adolescentes, en un escenario de manifestaciones heterogéneas, diversidad de instrumentos y posibles barreras de acceso a evaluación especializada**.
 
-**Problema central:** Dificultades para identificar y evaluar oportunamente el uso problemático de internet en niños y adolescentes, debido a la complejidad del fenómeno y a las limitaciones de los métodos de detección disponibles.
+### Relaciones entre causas y efectos
 
-### 2.2. Problema específico de investigación
-
-Si bien los indicadores físicos, de actividad y demográficos pueden obtenerse mediante evaluaciones y dispositivos, **no está establecido para este proyecto** en qué medida predicen confiablemente la severidad del uso problemático de internet, especialmente cuando se excluye información directamente relacionada con la construcción de la etiqueta. La base HBN también presenta datos faltantes y variación en la disponibilidad de mediciones [4].
-
-**Pregunta de investigación:** ¿En qué medida los modelos de aprendizaje automático permiten predecir los niveles de severidad del uso problemático de internet en niños y adolescentes a partir de variables físicas, demográficas y de actividad, utilizando los datos del Healthy Brain Network?
-
-### 2.3. Justificación y alcance
-
-La propuesta tiene valor **social**, porque estudia una dificultad de identificación y evaluación en población infantil y adolescente; **científico**, porque permitirá contrastar la capacidad predictiva y las limitaciones de diferentes variables; y **académico**, porque integra comprensión del problema, análisis de datos, modelado y evaluación crítica.
-
-El resultado previsto es una **comparación exploratoria de modelos**, no una aplicación clínica, una herramienta diagnóstica ni una demostración de relaciones causales. La generalización a otras poblaciones requeriría evaluaciones adicionales.
-
-### 2.4. Árbol de problemas: perspectiva social
-
-Se diferencia entre causas o barreras que dificultan **identificar** el problema y factores asociados con el fenómeno. El diagrama representa un **marco conceptual por sustentar** y no relaciones causales verificadas experimentalmente.
+El árbol de problemas sintetiza las barreras que podrían contribuir a esta dificultad y algunas de sus consecuencias potenciales. Su organización parte del problema social, sin confundirlo con las tareas técnicas necesarias para construir un modelo predictivo.
 
 ```mermaid
 flowchart BT
-  A["Diversidad de instrumentos y criterios de evaluación"] --> P["Dificultades para identificar y evaluar oportunamente el uso problemático de internet en niños y adolescentes"]
-  B["Barreras de acceso a evaluación especializada"] --> P
-  C["Manifestaciones heterogéneas y dificultad para reconocerlas"] --> P
-  P --> E1["Posibles conductas problemáticas no identificadas oportunamente"]
-  P --> E2["Menores oportunidades de orientación y apoyo temprano"]
-  P --> E3["Dificultad para comparar evaluaciones y caracterizar necesidades"]
+    A["Diversidad de instrumentos y criterios de evaluación"] --> P["Dificultades para identificar y evaluar oportunamente el uso problemático de internet en niños y adolescentes"]
+    B["Barreras de acceso a evaluación especializada"] --> P
+    C["Manifestaciones heterogéneas y dificultad para reconocerlas"] --> P
+    P --> E1["Posibilidad de conductas problemáticas no identificadas oportunamente"]
+    P --> E2["Menores oportunidades de orientación y apoyo temprano"]
+    P --> E3["Dificultad para comparar evaluaciones y caracterizar necesidades"]
 ```
 
-**Interpretación.** La falta de criterios plenamente uniformes y la diversidad de instrumentos complican la comparación y detección estandarizada [1, 3]. Las barreras de acceso y la complejidad de las manifestaciones pueden limitar la identificación temprana [5]. Por separado, se estudiarán posibles relaciones con soledad, malestar emocional, sueño, actividad física y desempeño académico, **sin ubicarlas automáticamente como causas o consecuencias** [2, 6–7]. El aprendizaje automático constituye una respuesta tecnológica a explorar, no el problema social en sí.
+*Figura 1. Árbol de problemas propuesto a partir de la revisión inicial de literatura. Las conexiones expresan relaciones conceptuales plausibles que requieren sustento documental; no representan efectos causales demostrados experimentalmente.*
 
-### 2.5. Objetivos del proyecto
+Las dificultades en la definición y medición pueden obstaculizar una evaluación consistente [1, 3]. Asimismo, las barreras de acceso y la variedad de manifestaciones podrían restringir las oportunidades de identificación y orientación temprana [5]. Por otra parte, factores como la soledad, el malestar psicológico, el sueño y la actividad física se estudiarán como posibles **variables asociadas**, sin clasificarlas de antemano como causas o consecuencias directas [2, 6, 7].
 
-**Objetivo general.** Desarrollar y comparar, durante el periodo académico 2026-2, modelos de aprendizaje automático para predecir los cuatro niveles de severidad del uso problemático de internet en niños y adolescentes a partir de variables físicas, demográficas y de actividad del HBN, evaluando su desempeño y limitaciones.
+### Pregunta y propósito de la investigación
 
-**Objetivos específicos**
+El desafío planteado por el Child Mind Institute ofrece la posibilidad de explorar una respuesta tecnológica parcial a este problema social. Aunque las mediciones físicas, demográficas y de actividad están disponibles en el HBN, aún es necesario establecer cuánto aportan a una predicción confiable cuando se excluyen variables que revelan directamente la etiqueta de severidad. El conjunto de datos, además, presenta valores faltantes y diferencias en la disponibilidad de mediciones entre participantes [4].
 
-1. **Caracterizar** las fuentes y variables del conjunto de datos HBN, cuantificando datos faltantes, disponibilidad de etiquetas y distribución de los niveles de severidad.
-2. **Diseñar** una estrategia reproducible de preparación de datos y entrenar modelos de referencia y modelos alternativos apropiados para una clasificación ordinal, evitando fuga de información.
-3. **Comparar** el desempeño de los modelos mediante el **kappa ponderado cuadráticamente (QWK)** y métricas complementarias, examinando errores por categoría y posibles limitaciones de generalización.
-4. **Documentar** los resultados, decisiones metodológicas y restricciones de uso en un informe académico y en GitHub.
+La investigación se orienta mediante la siguiente pregunta:
 
-## 3. Estado del arte: revisión y soluciones existentes (5 %)
+> **¿En qué medida los modelos de aprendizaje automático permiten predecir los niveles de severidad del uso problemático de internet en niños y adolescentes a partir de variables físicas, demográficas y de actividad, utilizando los datos del Healthy Brain Network?**
 
-### 3.1. Definición y evaluación del uso problemático de internet
+Para responderla, se propone **desarrollar y comparar, durante el periodo académico 2026-2, modelos de aprendizaje automático capaces de predecir los cuatro niveles de severidad del uso problemático de internet, evaluando tanto su desempeño como sus limitaciones**.
 
-La literatura no emplea una definición operacional única del uso problemático de internet. Una revisión sistemática de Schlossarek et al. (2024) compara instrumentos de cribado y sus propiedades psicométricas, evidenciando la necesidad de seleccionar e interpretar cuidadosamente las escalas [1]. Pérez-Wiesner et al. (2024) abordan la validación de instrumentos en adolescentes [3].
+Este propósito se desarrollará mediante tres objetivos específicos:
 
-Esto es relevante porque el modelo predictivo tendrá como objetivo una **categoría construida a partir de un instrumento**, no un diagnóstico clínico universalmente establecido.
+1. Caracterizar las variables del HBN, su disponibilidad, los datos faltantes y la distribución de los niveles de severidad.
+2. Preparar los datos e implementar modelos de referencia y alternativas de aprendizaje automático apropiadas para una respuesta ordinal, evitando la fuga de información.
+3. Comparar los modelos mediante métricas pertinentes, analizar sus errores por categoría y discutir el alcance y las limitaciones de sus resultados.
 
-### 3.2. Factores asociados y repercusiones
+La investigación tiene interés social por el fenómeno abordado y valor metodológico por la oportunidad de estudiar datos heterogéneos, sesgos de representación y técnicas de predicción en un contexto sensible. Sus productos tendrán carácter exploratorio y académico.
 
-Restrepo et al. (2020) estudiaron asociaciones entre uso problemático de internet, trastornos psiquiátricos y deterioro funcional en niños y adolescentes [2]. Tóth-Király et al. (2021) examinaron longitudinalmente trayectorias y antecedentes individuales y sociales, así como resultados asociados [6]. Machimbarrena et al. (2019) estudiaron perfiles de uso problemático y calidad de vida relacionada con la salud [7].
+## Antecedentes científicos y tecnológicos
 
-Estos trabajos sustentan la relevancia social del proyecto, aunque sus resultados no deben generalizarse automáticamente a toda la población ni interpretarse como causalidad confirmada.
+### Comprensión y medición del uso problemático de internet
 
-### 3.3. Soluciones predictivas existentes
+La ausencia de una definición operacional plenamente uniforme constituye una dificultad relevante para estudiar el fenómeno. Schlossarek et al. (2024) revisaron instrumentos de cribado destinados a niños y adolescentes y analizaron sus propiedades psicométricas [1]. Por su parte, Pérez-Wiesner et al. (2024) abordaron la validación de un instrumento para identificar uso problemático de internet en adolescentes [3]. Estos antecedentes muestran por qué la elección de una escala, sus criterios y su población de aplicación deben examinarse antes de interpretar sus resultados.
 
-| Fuente | Solución o aporte informado | Utilidad y precaución para el proyecto |
+La información anterior es particularmente importante para el presente proyecto: el desenlace que se intentará predecir es una categoría derivada de una medición específica, no un diagnóstico clínico universal.
+
+### Asociaciones con bienestar y funcionamiento cotidiano
+
+Restrepo et al. (2020) investigaron asociaciones entre uso problemático de internet, trastornos psiquiátricos y deterioro funcional en niños y adolescentes [2]. Tóth-Király et al. (2021) estudiaron trayectorias longitudinales y antecedentes individuales y sociales, así como resultados asociados [6]. Machimbarrena et al. (2019) analizaron perfiles de uso problemático y calidad de vida relacionada con la salud [7].
+
+En conjunto, estos trabajos proporcionan fundamento para la relevancia social de la investigación y, a la vez, invitan a distinguir entre asociación estadística, capacidad de predicción y causalidad. Una variable que ayude a estimar un nivel de severidad no necesariamente explica su origen ni constituye por sí misma un criterio para intervenir.
+
+### Desarrollo de soluciones predictivas
+
+El reto del Child Mind Institute y Kaggle plantea una tarea de predicción sobre cuatro categorías ordenadas de severidad, utilizando datos del HBN. Entre los recursos disponibles se encuentran variables demográficas y físicas, cuestionarios y series de actigrafía. La competición propone evaluar la concordancia entre valores reales y predichos mediante el **coeficiente kappa ponderado cuadráticamente (QWK)** [4].
+
+La revisión bibliográfica preliminar también permitió identificar trabajos que estudian enfoques de aprendizaje automático para este problema o problemas estrechamente relacionados:
+
+| Investigación | Enfoque descrito | Consideración para este proyecto |
 |---|---|---|
-| Competición Child Mind Institute y Kaggle [4] | Predicción de severidad mediante datos físicos, cuestionarios y actigrafía del HBN; evaluación con **QWK**. | Define el problema de referencia, la etiqueta ordinal y las condiciones de evaluación. |
-| MREM-IUP, M. et al. (2024) [8] | Ensamble de regresores para evaluar el uso problemático a partir de indicadores físicos y conductuales. Consensus reporta **QWK 0,92**. | Comparación metodológica pertinente; resultado pendiente de validar en texto completo, particularmente variables utilizadas y separación de datos. |
-| Suh y Yoo (2025) [9] | Predicción de nivel de riesgo desde una perspectiva de salud digital. | Referencia para explorar preprocesamiento y características; confirmar resultados y protocolo en el artículo. |
-| Malallah e Iqbal (2026) [10] | Aprendizaje automático aplicado a indicios de uso problemático en niños. Consensus reporta exactitud del **100 %**. | Cifra que requiere revisión crítica: verificar si corresponde a entrenamiento, validación independiente y posible fuga de información. |
-| R. y S. (2025) [11] | Ensamble y optimización bayesiana sobre datos estructurados; Consensus reporta **QWK 0,72**. | Referencia técnica preliminar; verificar métrica y diseño de validación en la publicación. |
+| M. et al. (2024) [8] | Ensamble de regresores a partir de indicadores físicos y conductuales; el reporte de búsqueda atribuye **QWK = 0,92**. | Examinar selección de variables, validación y posible fuga de información antes de comparar su rendimiento. |
+| Suh y Yoo (2025) [9] | Predicción del nivel de riesgo desde una perspectiva de salud digital. | Revisar los métodos de preparación de datos y los factores considerados. |
+| Malallah e Iqbal (2026) [10] | Aprendizaje automático para estudiar indicios de uso problemático en niños; el reporte de búsqueda atribuye **exactitud del 100 %**. | Aclarar si la cifra procede de entrenamiento o evaluación independiente; comprobar sobreajuste y posibles variables derivadas del objetivo. |
+| R. y S. (2025) [11] | Modelos de ensamble sobre datos estructurados con optimización bayesiana; el reporte de búsqueda atribuye **QWK = 0,72**. | Revisar diseño de validación y condiciones de comparación. |
 
-**Análisis comparativo preliminar.** Los trabajos anteriores sugieren que los ensambles y el tratamiento de datos heterogéneos son alternativas relevantes. No obstante, las cifras provenientes del reporte automatizado de Consensus **no constituyen resultados verificados directamente en esta etapa**. Accuracy, AUC y QWK no son métricas intercambiables; tampoco puede inferirse superioridad sin evaluar los mismos datos, predictores y protocolos de validación.
+Estos antecedentes sugieren alternativas de modelado que vale la pena explorar, pero sus resultados numéricos se presentan aquí **como información preliminar localizada mediante Consensus y pendiente de comprobación completa en los artículos originales**. Tampoco resulta válido comparar directamente exactitud, AUC y QWK, ya que evalúan propiedades distintas y pueden provenir de diseños experimentales diferentes.
 
-### 3.4. Brechas y aporte esperado
+El aporte esperado del proyecto consistirá en evaluar modelos bajo condiciones de preparación y validación comparables, examinando de manera explícita los valores faltantes, la distribución de las categorías, las variables utilizadas y la posibilidad de generalizar los resultados.
 
-- Determinar cuánto pueden predecir las variables físicas, demográficas y de actividad **sin** incluir información que revele la etiqueta.
-- Evaluar el efecto de datos faltantes y el desbalance entre las cuatro categorías.
-- Comparar modelos bajo un procedimiento común de evaluación, con atención al orden de las categorías.
-- Reconocer sesgos de muestreo, límites de interpretación y ausencia de validación clínica externa.
+Una precaución central es evitar la **fuga de información**. En los datos de la competición, la categoría `sii` se deriva de `PCIAT-PCIAT_Total` [4]. Incluir ese total —o información que permita reconstruir directamente la etiqueta— como predictor produciría una evaluación engañosa de la capacidad del modelo para aprender a partir de indicadores físicos y de actividad.
 
-**Precaución fundamental sobre fuga de información:** `sii` se deriva de `PCIAT-PCIAT_Total` [4]. Ese total, así como variables que permitan reconstruirlo directa o indebidamente, no deben usarse como predictores de una evaluación independiente.
+## Enfoque metodológico y desarrollo previsto
 
-## 4. Planeación: tareas y cronograma (5 %)
+El trabajo seguirá una adaptación de **CRISP-DM**, iniciando con la comprensión del problema y de los datos, para continuar con su preparación, el desarrollo de modelos, la evaluación y la comunicación de resultados. Esta secuencia permite vincular las decisiones técnicas con la pregunta de investigación y documentar el proceso de manera reproducible.
 
-El proyecto se organizará con una adaptación de **CRISP-DM**: comprensión del problema, comprensión de datos, preparación, modelado, evaluación y comunicación. El trabajo será realizado por **un solo estudiante**. Se utilizarán Google Colab y Python para el procesamiento, y GitHub para documentación y control de versiones. Los archivos de datos masivos permanecerán fuera del repositorio.
+Se utilizarán los datos publicados para la competición *Child Mind Institute — Problematic Internet Use*, procedentes del Healthy Brain Network [4]. La información incluye archivos tabulares en formato CSV y series de actigrafía en formato Parquet. La variable objetivo, `sii` (*Severity Impairment Index*), presenta cuatro niveles ordenados: **0 (ninguno), 1 (leve), 2 (moderado) y 3 (severo)**. La exploración detallada de la base, la selección de variables y los experimentos se efectuarán durante las siguientes fases del proyecto.
 
-### 4.1. Cronograma y productos verificables
+La implementación se realizará principalmente con **Python en Google Colab**, apoyándose en Pandas y Scikit-learn. Kaggle y, cuando resulte apropiado, KaggleHub facilitarán el acceso a los recursos. GitHub se utilizará para documentar avances, scripts, notebooks y decisiones; las bases de datos voluminosas no se incorporarán directamente al repositorio.
 
-| Periodo | Actividades | Producto o hito | Entrega |
-|---|---|---|---|
-| **9–10 oct. 2026** | Delimitar problema social y pregunta, objetivos, árbol conceptual, revisión inicial de bibliografía, plan y cronograma. | README actualizado y reporte de primera etapa. | **1: 10 de octubre (20 %)** |
-| **11–24 oct. 2026** | Acceder al HBN desde Kaggle/Colab; revisar diccionario, variables, etiquetas y valores ausentes. | Inventario de variables y primeras tablas exploratorias. | Preparación de entrega 2 |
-| **25 oct.–7 nov. 2026** | Analizar distribuciones, desbalance, posibles fugas y variables candidatas; proponer transformaciones. | Análisis exploratorio y justificación de variables. | Preparación de entrega 2 |
-| **8–14 nov. 2026** | Establecer particiones y modelos base; formular hipótesis y realizar experimentos iniciales. | Reporte de exploración, modelos de referencia y pruebas. | **2: 14 de noviembre (10 %)** |
-| **15–23 nov. 2026** | Refinar preprocesamiento, entrenar y ajustar alternativas, comparar QWK y otras métricas. | Resultados comparativos y evaluación de errores. | Preparación de entrega 3 |
-| **24 nov.–1 dic. 2026** | Discusión crítica, limitaciones, conclusiones, bibliografía y video de 10 minutos. | Informe final, repositorio documentado y video. | **3: 1 de diciembre (70 %)** |
+### Plan de trabajo
 
-**Riesgos y mitigación previstos:** (a) archivos de actigrafía voluminosos: procesar selectivamente en Colab; (b) datos faltantes: evaluar estrategias dentro de las particiones de entrenamiento; (c) desbalance: emplear métricas adecuadas y revisar desempeño por clase; (d) fuga de información: excluir campos derivados del instrumento que determina la etiqueta; (e) capacidad computacional y tiempo individual: iniciar con modelos sencillos y datos tabulares, ampliando solo si es viable.
+El calendario corresponde al desarrollo individual del proyecto durante el último trimestre de 2026. Las fechas indican hitos académicos y periodos de trabajo previstos; no representan resultados ya obtenidos.
 
-### 4.2. Relación con la rúbrica general
+| Periodo | Trabajo previsto | Producto esperado |
+|---|---|---|
+| **Hasta el 10 de octubre** | Delimitación del problema, revisión bibliográfica inicial, árbol de problemas, formulación de objetivos y organización del proyecto. | Documento inicial publicado en GitHub. |
+| **11–24 de octubre** | Acceso a los recursos de HBN, comprensión del diccionario de datos, identificación de variables y evaluación inicial de su disponibilidad. | Inventario de variables y primeras observaciones exploratorias. |
+| **25 de octubre–7 de noviembre** | Análisis de valores faltantes, desbalance, relaciones entre variables y posibles fuentes de fuga de información. | Análisis exploratorio documentado y justificación inicial de variables. |
+| **8–14 de noviembre** | Preparación de particiones de datos, definición de hipótesis y entrenamiento de modelos de referencia. | Reporte de exploración y primeros experimentos, con entrega el **14 de noviembre**. |
+| **15–23 de noviembre** | Comparación y ajuste de modelos, evaluación de desempeño y análisis de errores. | Resultados comparativos y discusión preliminar. |
+| **24 de noviembre–1 de diciembre** | Integración de resultados, discusión de limitaciones, conclusiones, revisión de referencias y preparación del video académico. | Informe final y sustentación en video, con entrega el **1 de diciembre**. |
 
-| Etapa | Criterios de evaluación |
-|---|---|
-| **Primera (20 %)** | Análisis del problema, objetivos y árbol (10 %); estado del arte y soluciones existentes (5 %); tareas y cronograma (5 %). |
-| **Segunda (10 %)** | Análisis exploratorio y justificación de datos/variables (5 %); hipótesis, modelos de referencia y experimentos iniciales (5 %). |
-| **Tercera (70 %)** | Reporte final con introducción, metodología, resultados, discusión, conclusiones y referencias; video de sustentación de 10 minutos, según la rúbrica integral del curso. |
+El volumen de los archivos de actigrafía y los recursos computacionales disponibles en Colab hacen aconsejable iniciar con un modelo de referencia basado en información tabular. La incorporación de las series temporales dependerá de su viabilidad, del tiempo disponible y del valor analítico que puedan aportar. La preparación y cualquier técnica de balanceo deberán realizarse sin utilizar información del conjunto de evaluación para ajustar el modelo.
 
-## 5. Datos y herramientas previstas
+## Alcance, consideraciones éticas y limitaciones
 
-**Origen:** [Child Mind Institute — Problematic Internet Use (Kaggle)](https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use).
+El proyecto empleará datos disponibles para investigación que se distribuyen sin identificación directa de los participantes, respetando las condiciones de uso de la fuente. Al trabajar con información vinculada con menores de edad y salud mental, se evitará publicar datos identificables, se reconocerán los posibles sesgos del conjunto y se presentarán las predicciones con prudencia.
 
-**Datos:** archivos tabulares CSV y series de actigrafía Parquet del Healthy Brain Network [4]. El análisis detallado de su calidad y de la viabilidad de las variables corresponde a la segunda entrega.
+El desempeño de un modelo en esta base no demuestra que pueda detectar casos clínicos en escenarios reales. Tampoco permite concluir que las características físicas o de actividad sean causas del uso problemático de internet. Una aplicación externa exigiría validación independiente, evaluación de seguridad y consideración del contexto de uso y de las poblaciones a las que estaría dirigida.
 
-**Variable objetivo:** `sii` (*Severity Impairment Index*): **0, ninguno; 1, leve; 2, moderado; 3, severo**. La evaluación de referencia emplea QWK [4].
-
-**Herramientas:** Google Colab, Python, Pandas, Scikit-learn, Kaggle y [KaggleHub](https://github.com/Kaggle/kagglehub); [GitHub](https://github.com/ChrisCuello/Prediccion-Uso-Problematico-Internet-MIAA-2026-2) para el seguimiento de versiones.
-
-## 6. Consideraciones éticas y limitaciones
-
-El estudio utiliza información compartida sin identificación directa de los participantes, sujeta a las condiciones de uso de la fuente. Por tratarse de menores de edad y variables potencialmente sensibles, los análisis deberán evitar inferencias clínicas injustificadas, no publicar información identificable y reconocer sesgos o limitaciones de representatividad.
-
-Un buen resultado predictivo en este dataset **no equivale** a detección clínica temprana validada ni demuestra relaciones causales. Cualquier aplicación real necesitaría validación adicional en poblaciones y contextos de uso independientes.
-
-## 7. Referencias bibliográficas
-
-Las referencias [1–7] fundamentan el contexto y el reto. Las referencias [8–11] se incorporan como **antecedentes predictivos preliminares** identificados mediante Consensus; los valores de desempeño deberán corroborarse contra sus artículos originales antes de considerarse definitivos.
+## Referencias
 
 1. Schlossarek, S., et al. (2024). *Which Are the Optimal Screening Tools for Internet Use Disorder in Children and Adolescents? A Systematic Review of Psychometric Evidence*. Current Addiction Reports. https://doi.org/10.1007/s40429-024-00568-w
 2. Restrepo, A., et al. (2020). *Problematic internet use in children and adolescents: associations with psychiatric disorders and impairment*. BMC Psychiatry. https://doi.org/10.1186/s12888-020-02640-x
@@ -162,4 +133,4 @@ Las referencias [1–7] fundamentan el contexto y el reto. Las referencias [8–
 10. Malallah, F., & Iqbal, K. (2026). *Predicting Signs of Problematic Internet Use to Analyze Children's Health Using Machine Learning*. https://doi.org/10.5220/0014231300004070
 11. R., N. K., & S, P. (2025). *Predicting Problematic Internet Use in Children Using Feature-Rich Structured Data with Ensemble Machine Learning and Bayesian Optimisation*. https://doi.org/10.1109/apsipaasc65261.2025.11249107
 
-**Documentación académica utilizada:** Universidad Icesi, *Proyecto de curso: elige tu reto*, *Plantilla de reporte escrito* y *Porcentajes de evaluación* (2026). Los dos reportes de Consensus suministrados sirvieron para localizar literatura; no se emplearon como sustitutos de publicaciones científicas originales.
+La revisión inicial utilizó como guías de búsqueda dos reportes obtenidos con Consensus y materiales académicos de la Universidad Icesi. Los antecedentes identificados mediante búsqueda asistida se señalan como preliminares cuando las métricas o detalles metodológicos todavía requieren consulta del texto original.
