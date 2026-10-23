@@ -47,13 +47,13 @@ La investigación se orienta mediante la siguiente pregunta:
 
 > **¿En qué medida los modelos de aprendizaje automático permiten predecir los niveles de severidad del uso problemático de internet en niños y adolescentes a partir de variables físicas, demográficas y de actividad, utilizando los datos del Healthy Brain Network?**
 
-Para responderla, se propone **desarrollar y comparar, durante el periodo académico 2026-2, modelos de aprendizaje automático capaces de predecir los cuatro niveles de severidad del uso problemático de internet, evaluando tanto su desempeño como sus limitaciones**.
+Para responderla, se propone **desarrollar y comparar, a más tardar el 1 de diciembre de 2026, al menos tres configuraciones de aprendizaje automático para predecir los cuatro niveles de severidad del uso problemático de internet**, utilizando los datos del HBN y evaluando su desempeño mediante QWK, F1-macro y matrices de confusión, así como sus limitaciones metodológicas.
 
 Este propósito se desarrollará mediante tres objetivos específicos:
 
-1. Caracterizar las variables del HBN, su disponibilidad, los datos faltantes y la distribución de los niveles de severidad.
-2. Preparar los datos e implementar modelos de referencia y alternativas de aprendizaje automático apropiadas para una respuesta ordinal, evitando la fuga de información.
-3. Comparar los modelos mediante métricas pertinentes, analizar sus errores por categoría y discutir el alcance y las limitaciones de sus resultados.
+1. **Caracterizar, hasta el 14 de noviembre de 2026, la totalidad de las variables del conjunto tabular de entrenamiento del HBN**, documentando el porcentaje de valores faltantes por variable, la disponibilidad de la etiqueta `sii`, la distribución de las cuatro categorías y los criterios preliminares de selección y exclusión de predictores.
+2. **Preparar los datos e implementar, hasta el 14 de noviembre de 2026, al menos dos modelos de referencia**, documentando la partición de entrenamiento y validación, las decisiones de preprocesamiento y el control de fuga de información, incluida la exclusión de `PCIAT-PCIAT_Total` como predictor de `sii`.
+3. **Comparar, hasta el 1 de diciembre de 2026, al menos tres configuraciones predictivas**, utilizando QWK como métrica principal, F1-macro y matrices de confusión como medidas complementarias, y presentar un análisis de errores por categoría y de las limitaciones para generalizar los resultados.
 
 La investigación tiene interés social por el fenómeno abordado y valor metodológico por la oportunidad de estudiar datos heterogéneos, sesgos de representación y técnicas de predicción en un contexto sensible. Sus productos tendrán carácter exploratorio y académico.
 
@@ -79,12 +79,12 @@ La revisión bibliográfica preliminar también permitió identificar trabajos q
 
 | Investigación | Enfoque descrito | Consideración para este proyecto |
 |---|---|---|
-| M. et al. (2024) [8] | Ensamble de regresores a partir de indicadores físicos y conductuales; el reporte de búsqueda atribuye **QWK = 0,92**. | Examinar selección de variables, validación y posible fuga de información antes de comparar su rendimiento. |
+| Karthiga M. et al. (2024) [8] | Ensamble de LightGBM, XGBoost, CatBoost y TabNet; el resumen del artículo original reporta **QWK = 0,92**. | El resultado está documentado por la revista; se requiere examinar las variables utilizadas y el protocolo de validación antes de compararlo con los experimentos propios. |
 | Suh y Yoo (2025) [9] | Predicción del nivel de riesgo desde una perspectiva de salud digital. | Revisar los métodos de preparación de datos y los factores considerados. |
-| Malallah e Iqbal (2026) [10] | Aprendizaje automático para estudiar indicios de uso problemático en niños; el reporte de búsqueda atribuye **exactitud del 100 %**. | Aclarar si la cifra procede de entrenamiento o evaluación independiente; comprobar sobreajuste y posibles variables derivadas del objetivo. |
-| R. y S. (2025) [11] | Modelos de ensamble sobre datos estructurados con optimización bayesiana; el reporte de búsqueda atribuye **QWK = 0,72**. | Revisar diseño de validación y condiciones de comparación. |
+| Malallah e Iqbal (2026) [10] | Estudio con datos del HBN; el resumen editorial original reporta **exactitud del 100 %** para Gradient Boost Regression. | Comprobar el alcance de la métrica y el procedimiento de validación descrito; examinar posibles riesgos de sobreajuste y fuga de información antes de interpretarla como generalizable. |
+| Niteesh K. R. y Pooja T. S. (2025) [11] | Comparación de ensambles con optimización bayesiana; el artículo original reporta para XGBoost **QWK medio = 0,7218** en validación cruzada estratificada de cinco particiones. | La métrica procede de la tabla de resultados publicada; su comparación requiere considerar la partición y los predictores empleados. |
 
-Estos antecedentes sugieren alternativas de modelado que vale la pena explorar, pero sus resultados numéricos se presentan aquí **como información preliminar localizada mediante Consensus y pendiente de comprobación completa en los artículos originales**. Tampoco resulta válido comparar directamente exactitud, AUC y QWK, ya que evalúan propiedades distintas y pueden provenir de diseños experimentales diferentes.
+Estos antecedentes sugieren alternativas de modelado que vale la pena explorar. Los valores de QWK de [8] y [11], y la exactitud declarada por [10], fueron contrastados con las publicaciones originales; **esta comprobación bibliográfica no equivale a validar de manera independiente sus experimentos**. En particular, los valores extremos deben analizarse a la luz de las variables, las particiones y la posibilidad de fuga de información. Tampoco resulta válido comparar directamente exactitud, AUC y QWK, porque miden aspectos distintos y pueden provenir de diseños experimentales diferentes. Para [9] queda pendiente examinar en detalle el texto completo.
 
 El aporte esperado del proyecto consistirá en evaluar modelos bajo condiciones de preparación y validación comparables, examinando de manera explícita los valores faltantes, la distribución de las categorías, las variables utilizadas y la posibilidad de generalizar los resultados.
 
@@ -107,8 +107,8 @@ El calendario corresponde al desarrollo individual del proyecto durante el últi
 | **Hasta el 10 de octubre** | Delimitación del problema, revisión bibliográfica inicial, árbol de problemas, formulación de objetivos y organización del proyecto. | Documento inicial publicado en GitHub. |
 | **11–24 de octubre** | Acceso a los recursos de HBN, comprensión del diccionario de datos, identificación de variables y evaluación inicial de su disponibilidad. | Inventario de variables y primeras observaciones exploratorias. |
 | **25 de octubre–7 de noviembre** | Análisis de valores faltantes, desbalance, relaciones entre variables y posibles fuentes de fuga de información. | Análisis exploratorio documentado y justificación inicial de variables. |
-| **8–14 de noviembre** | Preparación de particiones de datos, definición de hipótesis y entrenamiento de modelos de referencia. | Reporte de exploración y primeros experimentos, con entrega el **14 de noviembre**. |
-| **15–23 de noviembre** | Comparación y ajuste de modelos, evaluación de desempeño y análisis de errores. | Resultados comparativos y discusión preliminar. |
+| **8–14 de noviembre** | Preparación de particiones de datos, definición de hipótesis y entrenamiento de **al menos dos modelos de referencia**, con control documentado de fuga de información. | Reporte de exploración y primeros experimentos, con entrega el **14 de noviembre**. |
+| **15–23 de noviembre** | Comparación y ajuste de modelos hasta completar **al menos tres configuraciones**, evaluación con QWK y F1-macro y análisis de matrices de confusión. | Resultados comparativos y discusión preliminar. |
 | **24 de noviembre–1 de diciembre** | Integración de resultados, discusión de limitaciones, conclusiones, revisión de referencias y preparación del video académico. | Informe final y sustentación en video, con entrega el **1 de diciembre**. |
 
 El volumen de los archivos de actigrafía y los recursos computacionales disponibles en Colab hacen aconsejable iniciar con un modelo de referencia basado en información tabular. La incorporación de las series temporales dependerá de su viabilidad, del tiempo disponible y del valor analítico que puedan aportar. La preparación y cualquier técnica de balanceo deberán realizarse sin utilizar información del conjunto de evaluación para ajustar el modelo.
@@ -128,7 +128,7 @@ El desempeño de un modelo en esta base no demuestra que pueda detectar casos cl
 5. Child Mind Institute. (2024). *Child Mind Institute and Kaggle Launch Competition to Predict Teen Internet Addiction*. https://childmind.org/blog/child-mind-institute-and-kaggle-launch-competition-to-predict-teen-internet-addiction/
 6. Tóth-Király, I., et al. (2021). *Longitudinal Trajectories, Social and Individual Antecedents, and Outcomes of Problematic Internet Use Among Late Adolescents*. Child Development. https://doi.org/10.1111/cdev.13525
 7. Machimbarrena, J. M., et al. (2019). *Profiles of Problematic Internet Use and Its Impact on Adolescents’ Health-Related Quality of Life*. International Journal of Environmental Research and Public Health. https://doi.org/10.3390/ijerph16203877
-8. M., K., et al. (2024). *MREM-IUP - A MultiRegressor Based Ensemble Model for Assessing the Internet Addiction in Youth Using Physical and Behavioural Indicators*. https://doi.org/10.70135/seejph.vi.2370
+8. Karthiga M., Sureshraja Ramar, Archudha A., Kavya D. N., Deepshree Buchade y Asesh Kumar Tripathy. (2024). *MREM-IUP - A MultiRegressor Based Ensemble Model for Assessing the Internet Addiction in Youth Using Physical and Behavioural Indicators*. *South Eastern European Journal of Public Health*, vol. XXV, pp. 1182–1189. https://doi.org/10.70135/seejph.vi.2370
 9. Suh, Y., & Yoo, J. (2025). *Risk level prediction for problematic internet use: A digital health perspective*. Internet Interventions. https://doi.org/10.1016/j.invent.2025.100863
-10. Malallah, F., & Iqbal, K. (2026). *Predicting Signs of Problematic Internet Use to Analyze Children's Health Using Machine Learning*. https://doi.org/10.5220/0014231300004070
-11. R., N. K., & S, P. (2025). *Predicting Problematic Internet Use in Children Using Feature-Rich Structured Data with Ensemble Machine Learning and Bayesian Optimisation*. https://doi.org/10.1109/apsipaasc65261.2025.11249107
+10. Malallah, F. L., e Iqbal, K. (2026). *Predicting Signs of Problematic Internet Use to Analyze Children's Health Using Machine Learning*. En *Proceedings of the 19th International Joint Conference on Biomedical Engineering Systems and Technologies*, vol. 1, BIOSIGNALS (pp. 247–254). SciTePress. https://doi.org/10.5220/0014231300004070
+11. Niteesh K. R. y Pooja T. S. (2025). *Predicting Problematic Internet Use in Children Using Feature-Rich Structured Data with Ensemble Machine Learning and Bayesian Optimisation*. En *2025 Asia Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA ASC)* (pp. 1627–1632). https://doi.org/10.1109/APSIPAASC65261.2025.11249107
