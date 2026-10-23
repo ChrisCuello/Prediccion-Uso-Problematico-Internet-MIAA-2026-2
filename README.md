@@ -86,9 +86,11 @@ La revisión bibliográfica preliminar también permitió identificar trabajos q
 
 Estos antecedentes sugieren alternativas de modelado que vale la pena explorar. Los valores de QWK de [8] y [11], y la exactitud declarada por [10], fueron contrastados con las publicaciones originales; **esta comprobación bibliográfica no equivale a validar de manera independiente sus experimentos**. En particular, los valores extremos deben analizarse a la luz de las variables, las particiones y la posibilidad de fuga de información. Tampoco resulta válido comparar directamente exactitud, AUC y QWK, porque miden aspectos distintos y pueden provenir de diseños experimentales diferentes. Para [9] queda pendiente examinar en detalle el texto completo.
 
+Las soluciones ganadoras de la competición aportan antecedentes prácticos adicionales. **Lennart Haupts (primer lugar)** documentó un ensamble de modelos de árboles —LightGBM, XGBoost, CatBoost y ExtraTrees—, ingeniería de características, imputación y validación cruzada estratificada. En lugar de entrenar directamente con las clases `sii`, utilizó `PCIAT-PCIAT_Total` como variable objetivo continua y transformó posteriormente las predicciones a las categorías requeridas [12]. **Aradhye Agarwal (segundo lugar)** destacó el tratamiento diferenciado de los valores faltantes según el significado de cada variable y la ampliación de la validación cruzada, partiendo de un notebook de referencia [13]. Ambos documentos son **reportes técnicos de participantes de Kaggle**, no publicaciones clínicas revisadas por pares, por lo que se utilizarán como antecedentes metodológicos y no como evidencia de validez clínica.
+
 El aporte esperado del proyecto consistirá en evaluar modelos bajo condiciones de preparación y validación comparables, examinando de manera explícita los valores faltantes, la distribución de las categorías, las variables utilizadas y la posibilidad de generalizar los resultados.
 
-Una precaución central es evitar la **fuga de información**. En los datos de la competición, la categoría `sii` se deriva de `PCIAT-PCIAT_Total` [4]. Incluir ese total —o información que permita reconstruir directamente la etiqueta— como predictor produciría una evaluación engañosa de la capacidad del modelo para aprender a partir de indicadores físicos y de actividad.
+Una precaución central es evitar la **fuga de información**. En los datos de la competición, `sii` se deriva de `PCIAT-PCIAT_Total` [4]. Conviene distinguir dos usos: **predecir `PCIAT-PCIAT_Total` como variable objetivo continua y convertir luego el resultado a `sii`**, tal como documentó el primer lugar [12], puede constituir una estrategia de entrenamiento; en cambio, **introducir `PCIAT-PCIAT_Total` como predictor para estimar `sii`** permitiría reconstruir la etiqueta y produciría fuga directa de información. La selección de variables, imputación y ajuste de modelos deberán ejecutarse sin utilizar información del conjunto reservado para evaluación.
 
 ## Enfoque metodológico y desarrollo previsto
 
@@ -119,6 +121,12 @@ El proyecto empleará datos disponibles para investigación que se distribuyen s
 
 El desempeño de un modelo en esta base no demuestra que pueda detectar casos clínicos en escenarios reales. Tampoco permite concluir que las características físicas o de actividad sean causas del uso problemático de internet. Una aplicación externa exigiría validación independiente, evaluación de seguridad y consideración del contexto de uso y de las poblaciones a las que estaría dirigida.
 
+## Conclusiones preliminares
+
+La revisión inicial permitió delimitar un problema social relacionado con las dificultades para identificar y evaluar oportunamente el uso problemático de internet en niños y adolescentes. La diversidad de instrumentos y manifestaciones, junto con las asociaciones descritas con aspectos del bienestar y del funcionamiento cotidiano, justifican estudiar enfoques complementarios sin asumir relaciones causales no demostradas.
+
+Los antecedentes científicos y las experiencias de la competición muestran el potencial de explorar modelos predictivos con información del Healthy Brain Network. Sin embargo, la calidad de los datos, la selección de variables, la estrategia de validación y el control de fuga de información condicionarán la interpretación de los resultados. La siguiente etapa deberá establecer, mediante análisis exploratorio y experimentos reproducibles, el alcance real de las predicciones antes de plantear conclusiones sobre su posible utilidad.
+
 ## Referencias
 
 1. Schlossarek, S., Hohls, L., Schmidt, H., Bischof, A., Bischof, G., Brandt, D., Borgwardt, S., Browne, D. T., Christakis, D., Hurst-Della Pietra, P., Demetrovics, Z., y Rumpf, H.-J. (2024). *Which Are the Optimal Screening Tools for Internet Use Disorder in Children and Adolescents? A Systematic Review of Psychometric Evidence*. *Current Addiction Reports*, 11, 753–770. https://doi.org/10.1007/s40429-024-00568-w
@@ -132,3 +140,6 @@ El desempeño de un modelo en esta base no demuestra que pueda detectar casos cl
 9. Suh, Y., & Yoo, J. (2025). *Risk level prediction for problematic internet use: A digital health perspective*. Internet Interventions. https://doi.org/10.1016/j.invent.2025.100863
 10. Malallah, F. L., e Iqbal, K. (2026). *Predicting Signs of Problematic Internet Use to Analyze Children's Health Using Machine Learning*. En *Proceedings of the 19th International Joint Conference on Biomedical Engineering Systems and Technologies*, vol. 1, BIOSIGNALS (pp. 247–254). SciTePress. https://doi.org/10.5220/0014231300004070
 11. Niteesh K. R. y Pooja T. S. (2025). *Predicting Problematic Internet Use in Children Using Feature-Rich Structured Data with Ensemble Machine Learning and Bayesian Optimisation*. En *2025 Asia Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA ASC)* (pp. 1627–1632). https://doi.org/10.1109/APSIPAASC65261.2025.11249107
+
+12. Haupts, L. (2025). *First Place Write-Up: Or How I Won the Lottery* [Reporte técnico de la solución ganadora de Kaggle]. *Child Mind Institute — Problematic Internet Use*. https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use/writeups/lennart-haupts-first-place-write-up-or-how-i-won-t
+13. Agarwal, A. (2024). *2nd Place Writeup* [Reporte técnico de competición Kaggle]. *Child Mind Institute — Problematic Internet Use*. https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use/writeups/aradhye-agarwal-2nd-place-writeup
