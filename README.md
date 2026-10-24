@@ -16,9 +16,10 @@ La pregunta central es: **¿en qué medida distintos bloques de características
 |---|---|
 | [**Entrega 1: formulación**](entrega_1/README.md) | Problema social, árbol de problemas, revisión bibliográfica, pregunta, objetivos y planificación. |
 | [**Entrega 2: análisis y experimentos**](entrega_2/README.md) | EDA, población de estudio, selección de variables, hipótesis, modelos de referencia, métricas y limitaciones. |
+| [**Notebook de la entrega 2**](entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb) | Código de EDA, modelos de referencia y ablaciones. [Abrir en Colab](https://colab.research.google.com/github/ChrisCuello/Prediccion-Uso-Problematico-Internet-MIAA-2026-2/blob/main/entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb). |
 | [**Referencias completas**](docs/referencias.md) | Bibliografía con autorías explícitas, DOI y enlaces. |
 
-**Productos académicos previstos para la entrega final:** un **informe escrito** y un **notebook de Python consolidado**. El notebook unificado todavía no está publicado en este repositorio; no debe confundirse la documentación existente con código completamente ejecutable aquí.
+**Productos académicos previstos para la entrega final:** un **informe escrito** y un **notebook de Python consolidado**. El [notebook unificado de EDA y modelos](entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb) ya está publicado en `entrega_2/`; el informe final se entrega por el medio académico establecido.
 
 ## Datos y acceso
 
@@ -42,7 +43,11 @@ Los resultados detallados, la evaluación por bloques y sus advertencias se pres
 
 1. Obtener los datos autorizados desde la [competición oficial](https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use).
 2. Consultar las decisiones de preparación, exclusión de variables PCIAT y evaluación en la [entrega 2](entrega_2/README.md).
-3. **Pendiente:** publicar y verificar un único notebook consolidado, junto con las dependencias e instrucciones para ejecutarlo. No se afirma aún reproducibilidad independiente desde GitHub.
+3. [Abrir el notebook unificado en Google Colab](https://colab.research.google.com/github/ChrisCuello/Prediccion-Uso-Problematico-Internet-MIAA-2026-2/blob/main/entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb) e iniciar sesión con la cuenta de Colab.
+4. En el panel **Secretos (🔑)**, crear `KAGGLE_API_TOKEN` con un token personal válido de [Kaggle](https://www.kaggle.com/settings/api) y habilitar **Acceso desde cuaderno**.
+5. Aceptar las reglas de la competición en Kaggle y ejecutar **Entorno de ejecución → Ejecutar todas**. El cuaderno instala dependencias en Colab, descarga los CSV necesarios y genera métricas agregadas.
+
+Se publicó el **código fuente sin salidas de ejecución guardadas**, sin datos individuales y sin tokens. La ejecución completa con datos reales fue confirmada por la persona autora en su sesión de Colab; no constituye validación independiente por terceros.
 
 ## Limitaciones y uso responsable
 
