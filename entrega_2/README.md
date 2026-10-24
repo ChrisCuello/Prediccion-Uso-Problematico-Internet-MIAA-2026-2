@@ -5,6 +5,13 @@
 
 > Los resultados corresponden a evaluación interna exploratoria. El documento académico final y un único notebook serán los dos productos de entrega; este apartado presenta su síntesis metodológica para consulta en GitHub.
 
+### Notebook ejecutable de la segunda entrega
+
+- **Código:** [PIU_MIAA_2026_2_Notebook_Unificado.ipynb](PIU_MIAA_2026_2_Notebook_Unificado.ipynb) ([abrir directamente en Colab](https://colab.research.google.com/github/ChrisCuello/Prediccion-Uso-Problematico-Internet-MIAA-2026-2/blob/main/entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb)).
+- **Entrada:** token personal configurado en **Colab → Secretos (🔑)** bajo el nombre exacto `KAGGLE_API_TOKEN`, con **Acceso desde cuaderno** habilitado; acceso aceptado a la [competición de Kaggle](https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use).
+- **Ejecución:** abrir en Colab y seleccionar **Entorno de ejecución → Ejecutar todas**. El notebook descarga `train.csv` y `data_dictionary.csv`, ejecuta EDA y modelos, y genera archivos de resultados agregados para descarga opcional.
+- **Privacidad y trazabilidad:** el archivo publicado contiene código fuente y explicaciones, **sin valores de credenciales, datos originales ni salidas guardadas**. La ejecución completa con datos de Kaggle fue confirmada por la persona autora; no equivale a verificación independiente de los resultados.
+
 ## Desarrollo y resultados de la segunda etapa
 
 **Corte de resultados: 23 de octubre de 2026.** Esta sección documenta actividades realizadas y resultados propios de la segunda etapa. Complementa la formulación de la primera entrega y no constituye una validación clínica ni una predicción prospectiva.
