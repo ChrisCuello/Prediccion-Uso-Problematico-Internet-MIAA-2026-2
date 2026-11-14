@@ -41,7 +41,7 @@ Los resultados detallados, la evaluación por bloques y sus advertencias se pres
 
 ## Entorno y protección de datos
 
-El repositorio contiene [\`requirements.txt\`](requirements.txt) para declarar las dependencias y [\`.gitignore\`](.gitignore) para excluir credenciales, datos individuales y archivos temporales. En Google Colab el notebook instala las dependencias que necesita. Para ejecución local con datos propios autorizados, puede utilizarse \`pip install -r requirements.txt\` y establecer \`FUENTE_DATOS="LOCAL"\`.
+El repositorio contiene [`requirements.txt`](requirements.txt) para declarar las dependencias y [`.gitignore`](.gitignore) para excluir credenciales, datos individuales y archivos temporales. En Google Colab el notebook instala las dependencias que necesita. Para ejecución local con datos propios autorizados, puede utilizarse `pip install -r requirements.txt` y establecer `FUENTE_DATOS="LOCAL"`.
 
 ## Ejecución y reproducibilidad
 
