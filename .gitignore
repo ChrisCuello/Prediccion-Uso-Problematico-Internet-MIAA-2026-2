@@ -1,0 +1,30 @@
+# Credenciales, configuracion privada
+kaggle.json
+**/kaggle.json
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Archivos individuales de Kaggle/HBN y resultados locales
+datos_piu_miaa/
+resultados_piu_miaa/
+Resultados_PIU_MIAA_*.zip
+train.csv
+test.csv
+data_dictionary.csv
+sample_submission.csv
+*.parquet
+*.feather
+*.joblib
+*.pkl
+
+# Entornos y archivos temporales
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
