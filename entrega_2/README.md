@@ -5,12 +5,14 @@
 
 > Los resultados corresponden a evaluación interna exploratoria. El documento académico final y un único notebook serán los dos productos de entrega; este apartado presenta su síntesis metodológica para consulta en GitHub.
 
-### Notebook ejecutable de la segunda entrega
+### Notebook unificado — entrega 2 y evaluación preparatoria de entrega 3
 
 - **Código:** [PIU_MIAA_2026_2_Notebook_Unificado.ipynb](PIU_MIAA_2026_2_Notebook_Unificado.ipynb) ([abrir directamente en Colab](https://colab.research.google.com/github/ChrisCuello/Prediccion-Uso-Problematico-Internet-MIAA-2026-2/blob/main/entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb)).
 - **Entrada:** token personal configurado en **Colab → Secretos (🔑)** bajo el nombre exacto `KAGGLE_API_TOKEN`, con **Acceso desde cuaderno** habilitado; acceso aceptado a la [competición de Kaggle](https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use).
-- **Ejecución:** abrir en Colab y seleccionar **Entorno de ejecución → Ejecutar todas**. El notebook descarga `train.csv` y `data_dictionary.csv`, ejecuta EDA y modelos, y genera archivos de resultados agregados para descarga opcional.
-- **Privacidad y trazabilidad:** el archivo publicado contiene código fuente y explicaciones, **sin valores de credenciales, datos originales ni salidas guardadas**. La ejecución completa con datos de Kaggle fue confirmada por la persona autora; no equivale a verificación independiente de los resultados.
+- **Ejecución:** abrir en Colab y seleccionar **Entorno de ejecución → Ejecutar todas**. El notebook descarga `train.csv` y `data_dictionary.csv`, ejecuta EDA y modelos, e incluye una evaluación ampliada con ajuste anidado, alternativa ordinal y calibración. La ejecución integral de esta versión actualizada en Colab está pendiente de comprobación por la persona autora.
+- **Privacidad y trazabilidad:** el archivo publicado contiene código fuente y explicaciones, **sin valores de credenciales, datos originales ni salidas guardadas**. Los resultados de la entrega 2 se distinguen de la evaluación ampliada preparatoria; ninguno equivale a validación externa.
+
+> **Control de versiones:** se conserva el análisis histórico de la entrega 2. Desde noviembre de 2026, el notebook incorpora una sección adicional de evaluación ampliada, cuyo protocolo (CV anidada 5 externa × 3 interna) y resultados no deben mezclarse directamente con la validación repetida 5 × 3 original.
 
 ## Desarrollo y resultados de la segunda etapa
 
@@ -64,9 +66,9 @@ En la categoría severa (`sii=3`), con solo **30 participantes**, la precisión 
 
 ### Reproducibilidad, límites y trabajo siguiente
 
-La trazabilidad académica se apoya en el informe y en un **notebook de Python único**, que integrará el preprocesamiento, el análisis exploratorio y los experimentos principales. Dicho notebook **aún no ha sido incorporado a este repositorio**. Los datos de entrada se obtienen desde la [competición oficial de Kaggle](https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use), previa aceptación de sus condiciones de acceso; no se redistribuyen aquí conjuntos de datos individuales ni series Parquet.
+La trazabilidad académica se apoya en el informe y en un **notebook de Python único**, ya incorporado a este repositorio, que integra preprocesamiento, EDA, modelos de referencia y un apartado adicional de experimentos para preparar la entrega 3. Los datos de entrada se obtienen desde la [competición oficial de Kaggle](https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use), previa aceptación de sus condiciones de acceso; no se redistribuyen aquí conjuntos de datos individuales ni series Parquet.
 
-Los resultados representan una **estimación concurrente exploratoria** mediante validación interna; no demuestran causalidad, rendimiento prospectivo, validez externa ni utilidad clínica. La siguiente fase podrá examinar estrategias ordinales, sensibilidad a la ponderación de clases, mecanismos de datos faltantes y evaluación independiente si resulta viable [15, 16].
+Los resultados representan una **estimación concurrente exploratoria** mediante validación interna; no demuestran causalidad, rendimiento prospectivo, validez externa ni utilidad clínica. La evaluación adicional ya examina una estrategia ordinal, calibración probabilística y optimización con validación cruzada anidada. La siguiente fase debe interpretar estos resultados, explorar la sensibilidad a la ponderación de clases y considerar validación independiente solo si se obtiene una cohorte apropiada [15, 16].
 
 **Referencias:** [bibliografía completa, con autores explícitos](../docs/referencias.md).  
 **Formulación y objetivos:** [primera entrega](../entrega_1/README.md).
