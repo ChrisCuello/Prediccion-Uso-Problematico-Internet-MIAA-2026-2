@@ -39,6 +39,10 @@ En la cohorte principal (**2.652 participantes de 5–17 años**, con 30 casos d
 
 Los resultados detallados, la evaluación por bloques y sus advertencias se presentan en la [documentación de la segunda entrega](entrega_2/README.md).
 
+## Entorno y protección de datos
+
+El repositorio contiene [\`requirements.txt\`](requirements.txt) para declarar las dependencias y [\`.gitignore\`](.gitignore) para excluir credenciales, datos individuales y archivos temporales. En Google Colab el notebook instala las dependencias que necesita. Para ejecución local con datos propios autorizados, puede utilizarse \`pip install -r requirements.txt\` y establecer \`FUENTE_DATOS="LOCAL"\`.
+
 ## Ejecución y reproducibilidad
 
 1. Obtener los datos autorizados desde la [competición oficial](https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use).
