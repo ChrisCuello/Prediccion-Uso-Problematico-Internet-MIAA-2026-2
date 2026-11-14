@@ -1,0 +1,10 @@
+# Dependencias del notebook de EDA, modelos y evaluacion exploratoria
+# Entorno recomendado: Google Colab, Python >= 3.11
+# El notebook instala algunas dependencias en Colab automaticamente.
+kaggle>=1.7,<2
+numpy>=2.2,<3
+pandas>=2.2,<3
+scipy>=1.13,<2
+scikit-learn==1.8.0
+matplotlib>=3.8,<4
+statsmodels>=0.14,<0.16
