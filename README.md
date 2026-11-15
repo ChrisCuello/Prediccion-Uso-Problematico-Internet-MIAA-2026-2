@@ -16,7 +16,7 @@ La pregunta central es: **¿en qué medida distintos bloques de características
 |---|---|
 | [**Entrega 1: formulación**](entrega_1/README.md) | Problema social, árbol de problemas, revisión bibliográfica, pregunta, objetivos y planificación. |
 | [**Entrega 2: análisis y experimentos**](entrega_2/README.md) | EDA, población de estudio, selección de variables, hipótesis, modelos de referencia, métricas y limitaciones. |
-| [**Notebook de la entrega 2**](entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb) | Código de EDA, modelos de referencia, ablaciones y evaluación ampliada (optimización, modelo ordinal y calibración) preparatoria de la entrega 3. [Abrir en Colab](https://colab.research.google.com/github/ChrisCuello/Prediccion-Uso-Problematico-Internet-MIAA-2026-2/blob/main/entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb). |
+| [**Notebook de la entrega 2**](entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb) | Código de EDA, modelos de referencia, ablaciones y evaluación ampliada, comparación de trece estrategias y pruebas de robustez. [Abrir en Colab](https://colab.research.google.com/github/ChrisCuello/Prediccion-Uso-Problematico-Internet-MIAA-2026-2/blob/main/entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb). |
 | [**Referencias completas**](docs/referencias.md) | Bibliografía con autorías explícitas, DOI y enlaces. |
 
 **Productos académicos previstos para la entrega final:** un **informe escrito** y un **notebook de Python consolidado**. El [notebook unificado de EDA y modelos](entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb) ya está publicado en `entrega_2/` e incluye una **sección nueva de evaluación ampliada para preparar la entrega 3**. El informe se entrega por el medio académico establecido. La documentación histórica de la entrega 2 no se ha reinterpretado a partir de los experimentos nuevos.
@@ -51,7 +51,7 @@ El repositorio contiene [`requirements.txt`](requirements.txt) para declarar las
 4. En el panel **Secretos (🔑)**, crear `KAGGLE_API_TOKEN` con un token personal válido de [Kaggle](https://www.kaggle.com/settings/api) y habilitar **Acceso desde cuaderno**.
 5. Aceptar las reglas de la competición en Kaggle y ejecutar **Entorno de ejecución → Ejecutar todas**. El cuaderno instala dependencias en Colab, descarga los CSV necesarios y genera métricas agregadas.
 
-Se publicó el **código fuente sin salidas de ejecución guardadas**, sin datos individuales y sin tokens. La sección de referencia original fue ejecutada en Colab; la evaluación ampliada se ejecutó por separado con una copia de los mismos datos y deja un resumen de resultados en el notebook. La ejecución del archivo actualizado de principio a fin en Colab aún requiere comprobación por la persona autora; ninguna de esas pruebas constituye validación independiente por terceros.
+Se publicó el **código fuente sin salidas de ejecución guardadas**, sin datos individuales y sin tokens. La versión ampliada se ejecutó de principio a fin en Python con la copia oficial de los CSV. El notebook presenta las tablas y la interpretación de la validación interna.
 
 ## Limitaciones y uso responsable
 
