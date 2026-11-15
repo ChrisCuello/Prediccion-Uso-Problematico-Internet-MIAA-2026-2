@@ -1,58 +1,42 @@
 # Predicción del uso problemático de internet en niños y adolescentes
 
-**Universidad Icesi · Maestría en Inteligencia Artificial Aplicada (MIAA), 2026-2**  
-**Autor:** [Christian Cuello](https://github.com/ChrisCuello)  
-**Estado:** primera y segunda entrega documentadas; fase final en desarrollo.
+**Universidad Icesi · Maestría en Inteligencia Artificial Aplicada (MIAA) · 2026-2**  
+**Autor** [Christian Cuello](https://github.com/ChrisCuello)
 
-## Resumen del proyecto
+## Proyecto
 
-Este proyecto investiga si modelos de aprendizaje automático pueden estimar los cuatro niveles ordinales de severidad del uso problemático de internet (`sii`) en niños y adolescentes a partir de datos demográficos, físicos y conductuales del **Healthy Brain Network (HBN)**. Su propósito es académico y exploratorio: **no pretende diagnosticar, establecer causalidad ni sustituir una evaluación clínica**.
+Se estudia en qué medida las variables demográficas, físicas, de sueño y de uso declarado de internet permiten estimar los cuatro niveles de severidad (`sii`, de 0 a 3) en la cohorte de 5–17 años del Healthy Brain Network (HBN). El análisis es académico, retrospectivo y exploratorio.
 
-La pregunta central es: **¿en qué medida distintos bloques de características permiten estimar la severidad de `sii` y cuáles son las limitaciones metodológicas de esa estimación?**
+## Documentación
 
-## Documentación por entrega
-
-| Recurso | Contenido y estado |
+| Recurso | Contenido |
 |---|---|
-| [**Entrega 1: formulación**](entrega_1/README.md) | Problema social, árbol de problemas, revisión bibliográfica, pregunta, objetivos y planificación. |
-| [**Entrega 2: análisis y experimentos**](entrega_2/README.md) | EDA, población de estudio, selección de variables, hipótesis, modelos de referencia, métricas y limitaciones. |
-| [**Notebook de la entrega 2**](entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb) | Código de EDA, modelos de referencia, ablaciones y evaluación ampliada, comparación de trece estrategias y pruebas de robustez. [Abrir en Colab](https://colab.research.google.com/github/ChrisCuello/Prediccion-Uso-Problematico-Internet-MIAA-2026-2/blob/main/entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb). |
-| [**Referencias completas**](docs/referencias.md) | Bibliografía con autorías explícitas, DOI y enlaces. |
+| [Entrega 1 · Formulación](entrega_1/README.md) | Problema, antecedentes, objetivos y planificación. |
+| [Entrega 2 · Análisis y resultados](entrega_2/README.md) | Cohorte, selección de variables, protocolos de evaluación, resultados y limitaciones. |
+| [Notebook unificado](entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb) | Análisis exploratorio, modelos de referencia, evaluación ampliada y pruebas de robustez. |
+| [Referencias](docs/referencias.md) | Bibliografía del proyecto. |
 
-**Productos académicos previstos para la entrega final:** un **informe escrito** y un **notebook de Python consolidado**. El [notebook unificado de EDA y modelos](entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb) ya está publicado en `entrega_2/` e incluye una **sección nueva de evaluación ampliada para preparar la entrega 3**. El informe se entrega por el medio académico establecido. La documentación histórica de la entrega 2 no se ha reinterpretado a partir de los experimentos nuevos.
+Los productos académicos previstos son un informe escrito y el notebook unificado.
 
-## Datos y acceso
+## Métodos y resultados
 
-**Fuente oficial:** [Child Mind Institute — Problematic Internet Use (Kaggle)](https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use).
+Se estudiaron **2.652 participantes de 5–17 años**, incluidos **30 con `sii=3`**. Se compararon tres bloques de predictores. El bloque A incluyó edad y sexo. El bloque B añadió IMC, frecuencia cardíaca y presión arterial sistólica y diastólica. El bloque C añadió la puntuación T de sueño (SDS-T) y la categoría de uso declarado de internet. El preprocesamiento se ajustó dentro de cada partición de entrenamiento.
 
-Se utilizan las variables tabulares de `train.csv` y su diccionario, además de una auditoría de series de actigrafía. Los datos originales deben obtenerse directamente de Kaggle siguiendo sus condiciones de acceso. **El repositorio no incluye bases individuales, identificadores ni archivos Parquet.**
+En el análisis de referencia, con cinco pliegues estratificados y tres repeticiones, el bloque C alcanzó un **QWK medio de 0,405** con regresión logística y **0,388** con *boosting* por histogramas.
 
-## Métodos y tecnologías
+La evaluación ampliada comparó versiones de referencia, optimizadas y calibradas, además de un clasificador ordinal acumulativo. En la comparación de **13 estrategias** del bloque C, con cinco pliegues externos y tres internos, el *boosting* por histogramas y Random Forest alcanzaron un **QWK de 0,425** al redondear a tres decimales. Detectaron **12 y 8 de los 30 casos severos**, con **100 y 78 falsas alertas**, respectivamente. Random Forest obtuvo un **QWK de 0,417** al reservar cada estación de ingreso por turno. El QWK se redujo al evaluar a los cuatro modelos de robustez en un rango de edad diferente del empleado para entrenarlos.
 
-Se utiliza **Python**, principalmente en **Google Colab**, con bibliotecas de análisis de datos y aprendizaje automático como **pandas** y **scikit-learn**. La evaluación inicial emplea validación cruzada estratificada de 5 particiones × 3 repeticiones; imputación y transformaciones dentro de cada partición de entrenamiento; **QWK** como métrica principal, junto con **F1-macro** y análisis de clases.
-
-Los modelos de referencia son regresión logística multiclase regularizada y **HistGradientBoostingClassifier**. Se comparan tres bloques de características: **A** (edad y sexo), **B** (A más IMC, frecuencia cardíaca y presiones arterial sistólica/diastólica), y **C** (B más SDS-T y categoría declarada de horas de internet).
-
-## Resultados iniciales de la segunda etapa
-
-En la cohorte principal (**2.652 participantes de 5–17 años**, con 30 casos de clase `sii=3`), el bloque C alcanzó un **QWK medio de 0,405** con regresión logística y **0,388** con boosting. El aporte incremental de las medidas físicas sobre el bloque demográfico no fue consistente. La clase severa mostró precisión muy baja (aproximadamente 5–6 %), de modo que los resultados **no justifican una aplicación clínica**.
-
-Los resultados detallados, la evaluación por bloques y sus advertencias se presentan en la [documentación de la segunda entrega](entrega_2/README.md).
-
-## Entorno y protección de datos
-
-El repositorio contiene [`requirements.txt`](requirements.txt) para declarar las dependencias y [`.gitignore`](.gitignore) para excluir credenciales, datos individuales y archivos temporales. En Google Colab el notebook instala las dependencias que necesita. Para ejecución local con datos propios autorizados, puede utilizarse `pip install -r requirements.txt` y establecer `FUENTE_DATOS="LOCAL"`.
+El QWK de la evaluación anidada se calculó sobre las predicciones fuera de muestra de los 2.652 participantes. El análisis de referencia reporta la media de los pliegues de validación repetida. El detalle de cada protocolo está en la [documentación de la Entrega 2](entrega_2/README.md).
 
 ## Ejecución y reproducibilidad
 
-1. Obtener los datos autorizados desde la [competición oficial](https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use).
-2. Consultar las decisiones de preparación, exclusión de variables PCIAT y evaluación en la [entrega 2](entrega_2/README.md).
-3. [Abrir el notebook unificado en Google Colab](https://colab.research.google.com/github/ChrisCuello/Prediccion-Uso-Problematico-Internet-MIAA-2026-2/blob/main/entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb) e iniciar sesión con la cuenta de Colab.
-4. En el panel **Secretos (🔑)**, crear `KAGGLE_API_TOKEN` con un token personal válido de [Kaggle](https://www.kaggle.com/settings/api) y habilitar **Acceso desde cuaderno**.
-5. Aceptar las reglas de la competición en Kaggle y ejecutar **Entorno de ejecución → Ejecutar todas**. El cuaderno instala dependencias en Colab, descarga los CSV necesarios y genera métricas agregadas.
+La fuente es la competición [Child Mind Institute — Problematic Internet Use](https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use). El notebook utiliza `train.csv` y `data_dictionary.csv`. La evaluación de modelos se realizó con variables tabulares. La auditoría de actigrafía se describe en la Entrega 2.
 
-Se publicó el **código fuente sin salidas de ejecución guardadas**, sin datos individuales y sin tokens. La versión ampliada se ejecutó de principio a fin en Python con la copia oficial de los CSV. El notebook presenta las tablas y la interpretación de la validación interna.
+- **Google Colab.** Abre el [notebook en Colab](https://colab.research.google.com/github/ChrisCuello/Prediccion-Uso-Problematico-Internet-MIAA-2026-2/blob/main/entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb). Para descargar los datos desde Kaggle se requiere aceptar las reglas de la competición y habilitar el secreto `KAGGLE_API_TOKEN` en Colab. El notebook reutiliza los CSV si ambos están disponibles en el entorno. Si Colab agota el tiempo de espera al leer el secreto, se puede continuar con los CSV en modo local.
+- **CSV disponibles.** Selecciona `FUENTE_DATOS = "LOCAL"` en la primera celda y ajusta `ARCHIVO_TRAIN_LOCAL` y `ARCHIVO_DICCIONARIO_LOCAL`. En un entorno Python propio, instala las dependencias de [`requirements.txt`](requirements.txt) y añade `xgboost==3.1.3` para ejecutar la comparación completa.
 
-## Limitaciones y uso responsable
+La ejecución integral se verificó en Python con los CSV oficiales. Las tablas principales y su interpretación se pueden leer en GitHub. Las celdas muestran los gráficos, matrices de confusión y demás resultados agregados al ejecutarse. Los archivos de salida se guardan individualmente en el entorno de ejecución, sin generar un ZIP.
 
-Se trata de una evaluación **retrospectiva y concurrente** mediante validación interna, sin prueba externa independiente. Las fechas individuales de varias mediciones tabulares no están verificadas; por tanto, no se debe interpretar el resultado como predicción prospectiva. El desbalance extremo de la categoría severa, los datos faltantes y el posible solapamiento entre constructos requieren cautela. Este proyecto no ofrece diagnóstico ni recomendaciones clínicas individuales.
+## Alcance
+
+Los resultados provienen de validación interna con datos retrospectivos. La base tabular carece de fechas completas que permitan establecer el orden de las mediciones. La prueba por estación examina sensibilidad estacional. La viabilidad clínica y el desempeño en una cohorte independiente quedan por evaluar.
