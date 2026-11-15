@@ -1,22 +1,12 @@
-# Entrega 2 — Análisis exploratorio y modelos de referencia
+# Entrega 2 — Análisis exploratorio y evaluación de modelos
 
-**Universidad Icesi · Maestría en Inteligencia Artificial Aplicada · 2026-2**  
-**Fuente de datos:** [Child Mind Institute — Problematic Internet Use (Kaggle)](https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use).
+**Universidad Icesi · Maestría en Inteligencia Artificial Aplicada · 2026-2**
 
-> Los resultados corresponden a evaluación interna exploratoria. El documento académico final y un único notebook serán los dos productos de entrega; este apartado presenta su síntesis metodológica para consulta en GitHub.
+El [notebook unificado](PIU_MIAA_2026_2_Notebook_Unificado.ipynb) reúne la caracterización de la cohorte, la comparación de predictores y la evaluación de modelos. Las secciones 9, 12 y 13.4 presentan los resultados del análisis de referencia, la evaluación de siete estrategias y la comparación de 13 estrategias con pruebas de robustez.
 
-### Notebook unificado — entrega 2 y evaluación preparatoria de entrega 3
+## Análisis de referencia
 
-- **Código:** [PIU_MIAA_2026_2_Notebook_Unificado.ipynb](PIU_MIAA_2026_2_Notebook_Unificado.ipynb) ([abrir directamente en Colab](https://colab.research.google.com/github/ChrisCuello/Prediccion-Uso-Problematico-Internet-MIAA-2026-2/blob/main/entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb)).
-- **Entrada:** token personal configurado en **Colab → Secretos (🔑)** bajo el nombre exacto `KAGGLE_API_TOKEN`, con **Acceso desde cuaderno** habilitado; acceso aceptado a la [competición de Kaggle](https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use).
-- **Ejecución:** abrir en Colab y seleccionar **Entorno de ejecución → Ejecutar todas**. El notebook descarga `train.csv` y `data_dictionary.csv`, ejecuta EDA y modelos, e incluye evaluación anidada, calibración y una comparación de trece estrategias con análisis de robustez. La ejecución integral se verificó en Python con la copia oficial de los CSV. La ruta de descarga autenticada en Colab queda disponible para reproducir el análisis.
-- **Privacidad y trazabilidad:** el archivo publicado contiene código fuente y explicaciones, **sin valores de credenciales, datos originales ni salidas guardadas**. Las tablas principales y la interpretación se leen directamente en el notebook. La sección 13 presenta la comparación de modelos y los resultados por estación, edad y disponibilidad de predictores.
-
-> **Control de versiones:** se conserva el análisis histórico de la entrega 2. Desde noviembre de 2026, el notebook incorpora una sección adicional de evaluación ampliada, cuyo protocolo (CV anidada 5 externa × 3 interna) y resultados no deben mezclarse directamente con la validación repetida 5 × 3 original.
-
-## Desarrollo y resultados de la segunda etapa
-
-**Corte de resultados: 23 de octubre de 2026.** Esta sección documenta actividades realizadas y resultados propios de la segunda etapa. Complementa la formulación de la primera entrega y no constituye una validación clínica ni una predicción prospectiva.
+El análisis de referencia corresponde al corte del 23 de octubre de 2026 y utiliza validación cruzada estratificada de cinco pliegues con tres repeticiones.
 
 ### Población y análisis exploratorio de datos
 
@@ -36,7 +26,7 @@ La matriz de selección evaluó los **58 campos tabulares distintos del identifi
 | **B. Físico** | A + IMC, frecuencia cardíaca, presión sistólica y presión diastólica | Determinar si las mediciones físicas aportan información adicional a la demografía. |
 | **C. Ampliado** | B + puntuación T de sueño SDS y categoría declarada de horas de internet | Explorar el aporte incremental de dos indicadores conductuales, sin atribuir causalidad. |
 
-Los ocho campos se seleccionaron por pertinencia, disponibilidad y comparabilidad de los bloques, **no por optimización posterior al resultado**. Los campos PCIAT se excluyeron como predictores porque `sii` se deriva de su puntuación total; `id` se utilizó exclusivamente como identificador. CGAS, PAQ-A/PAQ-C, FitnessGram, bioimpedancia, variables de temporada y actigrafía quedaron reservados para análisis posteriores por cobertura, solapamiento conceptual, redundancias o temporalidad no confirmada. Aplazamiento no significa descarte definitivo [14–16].
+Los ocho campos se seleccionaron por pertinencia, disponibilidad y comparabilidad de los bloques, **no por optimización posterior al resultado**. Los campos PCIAT se excluyeron como predictores porque `sii` se deriva de su puntuación total. El campo `id` se utilizó como identificador. CGAS, PAQ-A/PAQ-C, FitnessGram, bioimpedancia, variables de temporada y actigrafía quedaron reservados para análisis posteriores por cobertura, solapamiento conceptual, redundancias o temporalidad no confirmada [14–16].
 
 ### Hipótesis y protocolo experimental
 
@@ -46,9 +36,9 @@ Se compararon tres contrastes:
 - **H2:** agregar conjuntamente SDS-T e internet declarado al bloque físico mejora el QWK (**C − B**).
 - **H3 (exploratoria):** cada indicador, por separado, aporta información al bloque físico (**B + SDS − B** y **B + internet − B**).
 
-**Precisión metodológica:** los bloques A/B/C y el protocolo de comparación se definieron antes de entrenar. Sin embargo, la redacción direccional de H1/H2 se formalizó después de observar los primeros resultados y H3 se planteó en una ablación posterior. Por consiguiente, los contrastes son **descriptivos y exploratorios, no pruebas confirmatorias preinscritas**.
+**Precisión metodológica:** los bloques A/B/C y el protocolo de comparación se definieron antes de entrenar. Sin embargo, la redacción direccional de H1/H2 se formalizó después de observar los primeros resultados y H3 se planteó en una ablación posterior. Los contrastes se interpretan como descriptivos y exploratorios.
 
-Se implementaron dos clasificadores de referencia: **regresión logística multiclase regularizada** e **HistGradientBoostingClassifier**. Se utilizó **validación cruzada estratificada de cinco particiones, repetida tres veces** (15 evaluaciones internas), con particiones emparejadas para las comparaciones. La imputación, indicadores de ausencia, escalamiento y codificación se ajustaron exclusivamente en la porción de entrenamiento de cada pliegue; ambos algoritmos utilizaron `class_weight="balanced"`. No se optimizaron hiperparámetros en estas corridas.
+Se implementaron dos clasificadores de referencia: **regresión logística multiclase regularizada** e **HistGradientBoostingClassifier**. Se utilizó **validación cruzada estratificada de cinco particiones, repetida tres veces** (15 evaluaciones internas), con particiones emparejadas para las comparaciones. La imputación, indicadores de ausencia, escalamiento y codificación se ajustaron exclusivamente en la porción de entrenamiento de cada pliegue; ambos algoritmos utilizaron `class_weight="balanced"`. En este análisis se usaron hiperparámetros fijos.
 
 ### Resultados iniciales
 
@@ -60,15 +50,44 @@ Se implementaron dos clasificadores de referencia: **regresión logística multi
 | B + internet declarado | 0,361 | 0,342 | 0,338 | 0,346 |
 | C. Ampliada | **0,405** | 0,356 | **0,388** | **0,365** |
 
-En QWK, **B no mejoró consistentemente A** (H1 no apoyada de forma consistente). El bloque C superó B en los 15 pliegues de ambos clasificadores: diferencias medias **+0,082** en logística y **+0,097** en boosting. Los indicadores SDS-T e internet declarado también mostraron aportes individuales positivos en comparaciones exploratorias. Debido a que las evaluaciones repetidas comparten participantes, **no se tratan como 15 muestras independientes** ni se interpretan como evidencia confirmatoria.
+El efecto de añadir medidas físicas al bloque demográfico varió según el modelo y el pliegue. El bloque C superó B en los 15 pliegues de ambos clasificadores: diferencias medias **+0,082** en logística y **+0,097** en boosting. Los indicadores SDS-T e internet declarado también mostraron aportes individuales positivos en comparaciones exploratorias. Las tres repeticiones reutilizan a los mismos participantes, por lo que las métricas por pliegue tienen un alcance descriptivo.
 
-En la categoría severa (`sii=3`), con solo **30 participantes**, la precisión de C fue de aproximadamente **6,0 %** para logística y **5,4 %** para boosting; sus sensibilidades respectivas fueron **62,2 %** y **8,9 %**. Esto evidencia numerosas falsas alarmas. El desempeño agregado no sustenta identificar casos severos de manera fiable ni implementar la solución como herramienta clínica.
+En la categoría severa (`sii=3`), con solo **30 participantes**, la precisión de C fue de aproximadamente **6,0 %** para logística y **5,4 %** para boosting; sus sensibilidades respectivas fueron **62,2 %** y **8,9 %**. En ambos modelos, la mayoría de alertas severas correspondió a otras categorías.
 
-### Reproducibilidad, límites y trabajo siguiente
+## Evaluación ampliada
 
-La trazabilidad académica se apoya en el informe y en un **notebook de Python único**, ya incorporado a este repositorio, que integra preprocesamiento, EDA, modelos de referencia y un apartado adicional de experimentos para preparar la entrega 3. Los datos de entrada se obtienen desde la [competición oficial de Kaggle](https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use), previa aceptación de sus condiciones de acceso; no se redistribuyen aquí conjuntos de datos individuales ni series Parquet.
+### Optimización y calibración
 
-Los resultados representan una **estimación concurrente exploratoria** mediante validación interna; no demuestran causalidad, rendimiento prospectivo, validez externa ni utilidad clínica. La evaluación adicional ya examina una estrategia ordinal, calibración probabilística y optimización con validación cruzada anidada. La siguiente fase debe interpretar estos resultados, explorar la sensibilidad a la ponderación de clases y considerar validación independiente solo si se obtiene una cohorte apropiada [15, 16].
+Las secciones 11 y 12 comparan siete estrategias con el bloque C en la cohorte de 5–17 años. Se evaluaron la regresión logística y el *boosting* por histogramas con sus configuraciones de referencia, optimizadas y calibradas, junto con un clasificador ordinal acumulativo. La selección de hiperparámetros y la calibración se realizaron dentro de los conjuntos de entrenamiento de los cinco pliegues externos, con tres pliegues internos.
 
-**Referencias:** [bibliografía completa, con autores explícitos](../docs/referencias.md).  
-**Formulación y objetivos:** [primera entrega](../entrega_1/README.md).
+El *boosting* optimizado alcanzó un QWK de **0,425** frente a **0,401** en su configuración de referencia. Detectó **12 de 30 casos severos**, frente a **3 de 30**, y las falsas alertas aumentaron de **48 a 100**. La calibración redujo el puntaje de Brier y el *log-loss* de ambos modelos. El QWK también disminuyó al asignar la clase de mayor probabilidad.
+
+La sección **11.3** presenta el QWK por estrategia y la relación entre precisión y sensibilidad de la clase severa. Los ejes de la segunda gráfica están en porcentajes. La leyenda y los marcadores huecos y rellenos permiten identificar los modelos con valores próximos o coincidentes. La sección 11.4 muestra las matrices de confusión, los hiperparámetros elegidos y las métricas por pliegue.
+
+### Comparación de 13 estrategias y robustez
+
+La sección 13 compara una línea base de clase mayoritaria, regresiones logísticas regularizadas, KNN, ensambles de árboles, un clasificador ordinal acumulativo y aproximaciones de regresión sobre la escala 0–3. La comparación principal utilizó los mismos cinco pliegues externos estratificados para todas las estrategias. Se calculó un QWK global a partir de una predicción fuera de muestra por participante y estrategia.
+
+| Modelo | QWK | F1-macro | Casos severos detectados de 30 | Falsas alertas severas |
+|---|---:|---:|---:|---:|
+| Boosting por histogramas | 0,425 | 0,397 | 12 | 100 |
+| Random Forest | 0,425 | 0,392 | 8 | 78 |
+| Logística L2 | 0,400 | 0,357 | 18 | 300 |
+| XGBoost | 0,362 | 0,344 | 0 | 2 |
+
+Las falsas alertas severas corresponden a predicciones de `sii=3` en participantes de las categorías 0 a 2. El *boosting* por histogramas y Random Forest obtuvieron el mayor QWK al redondear a tres decimales. La logística L2 detectó más casos severos y también generó más falsas alertas.
+
+- **Partición.** Random Forest obtuvo el mayor QWK al reservar una estación por turno (0,417) y al reservar un 20 % estratificado de la cohorte (0,424). En la evaluación por estación detectó 4 de los 30 casos severos.
+- **Disponibilidad de predictores.** El bloque C presentó el mayor QWK frente a B, B + sueño y B + internet en los cuatro modelos evaluados bajo las mismas particiones.
+- **Edad.** Al entrenar en el rango de 5–12 años y evaluar en el de 13–17 años, y viceversa, los QWK oscilaron entre 0,016 y 0,234. La categoría severa incluyó 6 casos en 5–12 años y 24 en 13–17 años.
+- **Diagnóstico de modelos.** El VIF máximo fue 10,33 en la matriz de entrenamiento de OLS. La edad produjo la mayor pérdida media de QWK al permutar predictores en los pliegues externos de Random Forest y del *boosting* por histogramas.
+
+## Ejecución y alcance
+
+El notebook usa los CSV oficiales de la [competición de Kaggle](https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use). En [Google Colab](https://colab.research.google.com/github/ChrisCuello/Prediccion-Uso-Problematico-Internet-MIAA-2026-2/blob/main/entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb), la descarga utiliza `KAGGLE_API_TOKEN` desde Secretos. La lectura se reintenta una vez si el servicio no responde. Si ambos CSV ya están en el directorio de datos del entorno, el notebook los reutiliza con la configuración predeterminada. También admite `FUENTE_DATOS = "LOCAL"` y rutas explícitas a ambos archivos.
+
+La ejecución integral se verificó en Python con los CSV oficiales. Las tablas e interpretaciones principales están incorporadas en el notebook. Al ejecutar las celdas se muestran además las gráficas y los resultados agregados. Las salidas se guardan individualmente, sin generar un ZIP. El repositorio publica el código y los resultados resumidos.
+
+Los protocolos corresponden a validación interna sobre una sola cohorte. Las estaciones de ingreso carecen de un año asociado y se usaron para examinar sensibilidad estacional. La evaluación prospectiva y la validación en una cohorte independiente quedan pendientes [15, 16].
+
+[Referencias del proyecto](../docs/referencias.md) · [Formulación y objetivos de la Entrega 1](../entrega_1/README.md)
