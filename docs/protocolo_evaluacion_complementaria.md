@@ -20,6 +20,8 @@ Los márgenes de QWK son criterios operativos del proyecto. Los intervalos se es
 
 ## Candidatos y exploración ajustada
 
+En el control de plausibilidad del panel de bioimpedancia, los porcentajes de grasa fuera de [0, 100] se tratan como faltantes. Como control conservador, también se marca como faltante la masa libre de grasa de la misma medición. Esta regla se documentó antes de la comparación de modelos.
+
 Además de la cobertura por edad, sexo y severidad, se examina la redundancia mediante correlaciones de Spearman entre pares disponibles. Se comparan C y C más cada uno de los siguientes paneles representativos por separado:
 
 - PAQ-A y PAQ-C, puntuaciones totales de actividad.
