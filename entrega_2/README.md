@@ -2,7 +2,7 @@
 
 **Universidad Icesi · Maestría en Inteligencia Artificial Aplicada · 2026-2**
 
-El [notebook unificado](PIU_MIAA_2026_2_Notebook_Unificado.ipynb) reúne la caracterización de la cohorte, la comparación de predictores y la evaluación de modelos. Las secciones 9, 12 y 13.4 presentan los resultados del análisis de referencia, la evaluación de siete estrategias y la comparación de 13 estrategias con pruebas de robustez.
+El [notebook unificado](PIU_MIAA_2026_2_Notebook_Unificado.ipynb) reúne la caracterización de la cohorte, la comparación de predictores y la evaluación de modelos. Las secciones 9, 12 y 13.4 presentan los resultados del análisis de referencia, la evaluación de siete estrategias y la comparación de 13 estrategias con pruebas de robustez. La sección 14 reúne los análisis complementarios y la evaluación en una reserva interna.
 
 ## Análisis de referencia
 
@@ -60,7 +60,7 @@ En la categoría severa (`sii=3`), con solo **30 participantes**, la precisión 
 
 Las secciones 11 y 12 comparan siete estrategias con el bloque C en la cohorte de 5–17 años. Se evaluaron la regresión logística y el *boosting* por histogramas con sus configuraciones de referencia, optimizadas y calibradas, junto con un clasificador ordinal acumulativo. La selección de hiperparámetros y la calibración se realizaron dentro de los conjuntos de entrenamiento de los cinco pliegues externos, con tres pliegues internos.
 
-El *boosting* optimizado alcanzó un QWK de **0,425** frente a **0,401** en su configuración de referencia. Detectó **12 de 30 casos severos**, frente a **3 de 30**, y las falsas alertas aumentaron de **48 a 100**. La calibración redujo el puntaje de Brier y el *log-loss* de ambos modelos. El QWK también disminuyó al asignar la clase de mayor probabilidad.
+El *boosting* optimizado alcanzó un QWK de **0,425** frente a **0,401** en su configuración de referencia. Detectó **12 de 30 casos severos**, frente a **3 de 30**, y las falsas alertas aumentaron de **48 a 100**. La calibración redujo el puntaje de Brier y el *log-loss* de ambos modelos. Al asignar la clase de mayor probabilidad, el QWK disminuyó. En la logística, las alertas severas pasaron de 319 a 1 y los casos severos detectados pasaron de 18 a 1.
 
 La sección **11.3** presenta el QWK por estrategia y la relación entre precisión y sensibilidad de la clase severa. Los ejes de la segunda gráfica están en porcentajes. La leyenda y los marcadores huecos y rellenos permiten identificar los modelos con valores próximos o coincidentes. La sección 11.4 muestra las matrices de confusión, los hiperparámetros elegidos y las métricas por pliegue.
 
@@ -82,11 +82,26 @@ Las falsas alertas severas corresponden a predicciones de `sii=3` en participant
 - **Edad.** Al entrenar en el rango de 5–12 años y evaluar en el de 13–17 años, y viceversa, los QWK oscilaron entre 0,016 y 0,234. La categoría severa incluyó 6 casos en 5–12 años y 24 en 13–17 años.
 - **Diagnóstico de modelos.** El VIF máximo fue 10,33 en la matriz de entrenamiento de OLS. La edad produjo la mayor pérdida media de QWK al permutar predictores en los pliegues externos de Random Forest y del *boosting* por histogramas.
 
+## Evaluación complementaria
+
+El [protocolo](../docs/protocolo_evaluacion_complementaria.md) fijó los criterios antes de la nueva ejecución. Se utilizaron 1.989 participantes para desarrollo y 663 para evaluación interna. En desarrollo se estimaron asociaciones ordinales ajustadas por edad y sexo. Por una desviación estándar del predictor, la razón de momios ajustada para mayor severidad fue 1,66 para sueño y 1,56 para uso declarado de internet.
+
+- **Predictores.** En desarrollo, el bloque C mejoró el QWK en +0,085 frente a B. La bioimpedancia fue el único panel que cumplió el criterio de inclusión. Su ΔQWK fue +0,027 y el límite inferior del IC del 98,75 % quedó cerca de cero (0,00009). PAQ, CGAS y FitnessGram quedaron fuera de la evaluación en reserva según los criterios del protocolo.
+- **Comparación pareada.** En los resultados históricos de 13 estrategias, Random Forest frente a *boosting* obtuvo ΔQWK −0,00001 (IC 95 % de −0,024 a 0,024). En la nueva reserva, al usar el bloque C en ambos, el ΔQWK fue +0,031 (IC 95 % de −0,012 a 0,078).
+
+| Modelo en la reserva | QWK | F1-macro | Severos detectados | Falsas alertas |
+|---|---:|---:|---:|---:|
+| Boosting por histogramas con C | 0,373 | 0,384 | 2 de 8 | 22 |
+| Random Forest con C | 0,404 | 0,379 | 1 de 8 | 25 |
+| Boosting con C + bioimpedancia | 0,402 | 0,383 | 1 de 8 | 9 |
+
+**Regla de alerta.** Se fijó en desarrollo un umbral de `P(sii = 3)` de aproximadamente 0,02743 para la logística calibrada. En desarrollo, el umbral alcanzó 72,7 % de sensibilidad. En la reserva detectó 4 de 8 casos severos y produjo 75 falsas alertas. La sensibilidad fue 50,0 % (IC de Wilson del 95 % de 21,5 % a 78,5 %). La logística calibrada con clase más probable detectó 0 de 8. La logística de referencia con clase más probable detectó 4 de 8 y produjo 56 falsas alertas. La reserva proviene de la cohorte ya estudiada. La baja frecuencia de casos severos limita la precisión de la evaluación.
+
 ## Ejecución y alcance
 
 El notebook usa los CSV oficiales de la [competición de Kaggle](https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use). En [Google Colab](https://colab.research.google.com/github/ChrisCuello/Prediccion-Uso-Problematico-Internet-MIAA-2026-2/blob/main/entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb), la descarga utiliza `KAGGLE_API_TOKEN` desde Secretos. La lectura se reintenta una vez si el servicio no responde. Si ambos CSV ya están en el directorio de datos del entorno, el notebook los reutiliza con la configuración predeterminada. También admite `FUENTE_DATOS = "LOCAL"` y rutas explícitas a ambos archivos.
 
-La ejecución integral se verificó en Python con los CSV oficiales. Las tablas e interpretaciones principales están incorporadas en el notebook. Al ejecutar las celdas se muestran además las gráficas y los resultados agregados. Las salidas se guardan individualmente, sin generar un ZIP. El repositorio publica el código y los resultados resumidos.
+La evaluación complementaria se ejecutó en Python con los CSV oficiales. Las tablas e interpretaciones principales están incorporadas en el notebook. Al ejecutar las celdas se muestran además las gráficas y los resultados agregados. Las salidas se guardan individualmente, sin generar un ZIP. El repositorio publica el código y los resultados resumidos.
 
 Los protocolos corresponden a validación interna sobre una sola cohorte. Las estaciones de ingreso carecen de un año asociado y se usaron para examinar sensibilidad estacional. La evaluación prospectiva y la validación en una cohorte independiente quedan pendientes [15, 16].
 
