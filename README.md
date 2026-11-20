@@ -13,11 +13,18 @@ Se estudia en qué medida las variables demográficas, físicas, de sueño y de 
 |---|---|
 | [Entrega 1 · Formulación](entrega_1/README.md) | Problema, antecedentes, objetivos y planificación. |
 | [Entrega 2 · Análisis y resultados](entrega_2/README.md) | Cohorte, selección de variables, protocolos de evaluación, resultados y limitaciones. |
+| [Entrega 3 · Sustentación final](#entrega-3-sustentación-final) | Video de presentación y conclusiones del proyecto. |
 | [Notebook unificado](entrega_2/PIU_MIAA_2026_2_Notebook_Unificado.ipynb) | Análisis exploratorio, modelos de referencia, evaluación ampliada, pruebas de robustez y evaluación complementaria. |
 | [Protocolo de evaluación complementaria](docs/protocolo_evaluacion_complementaria.md) | Hipótesis, criterios de selección, regla de alerta y diseño de la reserva. |
 | [Referencias](docs/referencias.md) | Bibliografía del proyecto. |
 
-Los productos académicos previstos son un informe escrito y el notebook unificado.
+Los productos académicos incluyen un informe escrito, el notebook unificado y el video de sustentación.
+
+## Entrega 3. Sustentación final
+
+El video presenta el alcance del proyecto, la comparación de los modelos, los resultados de la evaluación complementaria y las conclusiones sobre su posible uso para tamizaje.
+
+[Ver el video de la Entrega 3 en YouTube](https://youtu.be/LObI7fPeOY0)
 
 ## Métodos y resultados
 
